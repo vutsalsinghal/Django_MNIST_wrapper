@@ -18,4 +18,4 @@ That's it! It's serving a saved Keras model to you via Django.
 
 ## Credits
 
-This code was inspired from [||Source||](https://github.com/||Source||), who had created a similar wrapper using [Flask](http://flask.pocoo.org/) Micro Framework.
+This code was inspired from [||Source||](https://github.com/llSourcell), who had created a similar wrapper using [Flask](http://flask.pocoo.org/) Micro Framework.
