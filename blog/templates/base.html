@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+  <title>{% block title_html %}{% endblock %}</title>
+{% load staticfiles %}
+  <link rel="shortcut icon" type="image/png" href="{% static 'favicon.gif'%}"/>
+  <link href="{% static 'css/materialize_new.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/material_icon.css' %}" type="text/css" rel="stylesheet" />
+<style>
+   .icon-block {
+     padding: 0 15px;
+    }
+
+   .icon-block .material-icons {
+	 font-size: inherit;
+   }
+
+   @font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Material Icons'), local('MaterialIcons-Regular'), url({% static "fonts/material.woff2" %}) format('woff2');
+   }
+
+   .myBlue_text
+   {
+   	color:#4285F4;
+   }
+
+   #footer_color
+		{
+			color:#fff;
+			background-color:#F7F7F7;
+		}
+
+		#nav_color
+		{
+			background-color:#eceff1;
+		}
+
+		@media (max-width: 1960px)
+		 {
+			#footer-down
+			{
+				min-height:700px;
+			}
+		 }
+
+		@media (max-width: 1280px)
+		 {
+			#footer-down
+			{
+				min-height:640px;
+			}
+		 }
+
+		@media only screen and (max-width: 500px)
+		 {
+			#footer-down
+			{
+				min-height:180px;
+			}
+		 }
+   
+   {% block load_css %}
+   {% endblock %}
+  </style>
+</head>
+<body>
+ 
+ <!--Nav starts-->
+  <nav id="nav_color" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo"><img src='{% static "py.png" %}' style='width:1.3em; height:1.3em;' /></a>
+      <ul class="right hide-on-med-and-down">
+       {% if user.is_authenticated %}
+        <li class="waves-effect waves-red"><a class="black-text" href="{% url "mnist" %}">MNIST</a></li>
+        <li><a class="black-text dropdown-button" data-beloworigin="true" data-constrainwidth="false" data-alignment="right" data-outduration="500" data-hover="true" data-activates="dropdown1">MENU<i class="material-icons right">arrow_drop_down</i></a></li>
+        <li class="waves-effect waves-red"><a class="black-text" href="{% url "logout" %}">LOG OUT</a></li>
+       {% else %}
+        <li class="waves-effect waves-light"><a class="black-text" href="{% url "connect" %}">LOGIN</a></li>
+        <li class="waves-effect waves-light"><a class="black-text" href="{% url "create_user" %}" title="Register new user">REGISTER</a></li>
+       {% endif %}
+      </ul>
+			<!-- Dropdown Structure -->
+			<ul id="dropdown1" class="dropdown-content">
+		    {% if user.is_authenticated %}
+		      <li class="waves-effect waves-light"><a href="{% url 'all_posts' %}">ALL POSTS</a></li>
+			    {% if user.is_superuser %}
+		  	    <li class="divider"></li>
+		    	  <li class="waves-effect waves-green"><a href="/admin" target="_blank">ADMIN</a></li>
+		      {% endif %}
+		    {% endif %}
+		  </ul>
+			<!--Mobile Demo-->
+		  <ul id="nav-mobile" class="side-nav">
+		    {% if user.is_authenticated %}
+		    	<li><a class="waves-effect waves-red" href="{% url 'all_posts' %}">ALL POSTS</a></li>
+          <li><a class="waves-effect waves-red" href="{% url 'mnist' %}">MNIST</a></li>
+		      <li class="divider"></li>
+		      <li><a class="waves-effect waves-red" href="{% url "logout" %}">LOG OUT</a></li>
+		     	{% if user.is_superuser %}
+		      	<li class="divider"></li>
+		        <li><a class="waves-effect waves-green" href="/admin" target="_blank">ADMIN</a></li>
+		      {% endif %}
+		    {% else %}
+		      <li><a class="waves-effect waves-dark" href="#">LOGIN</a></li>
+		      <li><a class="waves-effect waves-dark" href="#">REGISTER</a></li>
+		    {% endif %}
+		  </ul>
+		  <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="black-text material-icons">menu</i></a>
+	  </div>
+  </nav>
+<!--Nav ends-->
+
+<h4 class="header center amber-text">{% block h1 %}{% endblock %}</h4>
+<div id="footer-down">
+  {% block article_content %}
+  {% endblock %}
+</div>
+
+<!--Footer-->
+  <footer class="page-footer" id="footer_color">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 m9 s12">
+          <h5 class="black-text">Stormy Developers<sub><img src='/static/images/Stormy.png'></sub></h5>
+          <p class="black-text text-lighten-4">We are a team of enthusiastic college students working on such novel project. Your help and support on development of our
+          project is greatly appreciated.</p>
+        </div>
+        <div class="col l3 s12 m3">
+          <h5 class="black-text">Contact Us</h5>
+          <p class="black-text">For any suggestion or queries, you can drop a message <a href="#" class="red-text accent-4">here</a>.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m12 l10 black-text">
+            Proudly hosted on <b><a class="red-text text-lighten-3" href="http://pythonanywhere.com">Pythonanywhere</a></b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+<!--End Footer-->
+
+  <!--  Scripts-->
+  <script src="{% static 'javascript/jquery.min.js' %}"></script>
+  <script src="{% static 'javascript/materialize_new.min.js' %}"></script>
+  <script type="text/javascript">
+   $(function(){
+    $('.button-collapse').sideNav();
+	  });
+  </script>
+  <script type="text/javascript">
+   {% block load_js %}
+   {% endblock %}
+  </script>
+  </body>
+</html>

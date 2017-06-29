@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title_html %}
+ Connect
+{% endblock %}
+
+{% block page_heading %}
+ Sign in
+{% endblock %}
+
+{% block load_css %}
+	.icon_color
+	{
+		color:#4285F4;
+	}
+{% endblock %}
+
+{% block article_content %}
+<div class=section>
+	 <div class="container">
+		{% if user.is_authenticated %}
+				<h3>You are connected.</h3><br><br>
+				<p>
+						Username : {{ user.first_name }}<br>
+						Email    : {{ user.email }}<br>
+				</p>
+				<script type="text/javascript">
+					setTimeout(function() {
+						window.location.href = "/";
+					}, 2000);
+				</script>
+		{% else %}
+		<div class='row'></div>
+		<div class='row'></div>
+		<div class='row'></div>
+		<div class='row'></div>
+			<form method="POST">
+				{% csrf_token %}
+		    <div class='row'>
+		      <div class='col l6 s12 m6 offset-l3 offset-m3 card'>
+		      	<div class='section'>
+			      	<div class= 'container'>
+					    	<div class="row">
+					      	<div class="input-field">
+					        	<i style ='color:#4285F4' class="material-icons prefix icon_color">account_circle</i>
+					        	<label for="Username"></label>
+					        	{{ form.username }}
+						      </div>
+						     </div>
+						     <div class='row'>
+						      <div class="input-field">
+						        <i style ='color:#4285F4' class="material-icons prefix icon_color">lock</i>
+						        <label for="Password"></label>
+					  	      {{ form.password }}
+					    	  </div>
+					    	</div>
+					    	<div class='row'></div>
+					    	<a class='dropdown-button btn grey lighten-2 black-text' data-constrainwidth="false" data-alignment="right" data-outduration="500" data-hover="true" data-beloworigin="true" data-activates='more_options_dropdown'>More</a>
+					    	<button class="btn hoverable right waves-effect waves-light green" type="submit" name="action"><i class="material-icons right">send</i></button>
+					    	<div class='row'></div>
+				    	</div>
+				    </div>
+				  </div>
+				</div>
+			</form>
+		{% endif %}
+	 </div>
+</div>
+
+<!-- Dropdown Structure -->
+  <ul id='more_options_dropdown' class='dropdown-content'>
+    <li><a href="{% url 'create_user' %}">Create Account</a></li>
+    <li><a href="#!" class='red-text'>Forgot Password</a></li>
+  </ul>
+{% endblock %}
+
+{% block load_js %}
+	$('.dropdown-button').dropdown({
+      inDuration: 300,
+      outDuration: 225,
+      constrainWidth: false, 
+      hover: true, 
+      gutter: 0, 
+      belowOrigin: false, 
+      alignment: 'left', 
+      stopPropagation: false 
+    }
+  );
+{% endblock %}

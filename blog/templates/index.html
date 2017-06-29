@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+ {% block title_html %}
+  Pyofey | Blog
+ {% endblock %}
+
+ {% block load_css %}
+  #links li{
+   list-style-type:circle;
+  }
+
+  #container_color_1
+  {
+    background-color: #0f9d58;
+  }
+
+  #container_color_2
+  {
+    background-color:#F4B400;
+  }
+
+  #container_color_3
+  {
+    background-color: #DB4437;
+  }
+
+  #color_block
+  {
+    padding: 0;
+    margin: 0;
+    display: block;
+  }
+ {% endblock %}
+
+ {% block article_content %}
+  <div class="section" id="index-banner">
+    <div class="container" id='container_color_1'>
+      <br>
+      {% if user.is_authenticated %}
+        <h1 class="header center black-text">Hi {{ request.user | capfirst }}!</h1>
+      {% else %}
+        <h1 class="header center black-text">Hi There!</h1>
+      {% endif %}
+      <br>
+    </div>
+
+    <div class="container" id='container_color_2'>
+      <div class='row'></div>
+      <div class='row'></div>
+      <div class='row'></div>
+      <div class="row center">
+        <h5 class="header col s12 light white-text">A <a href="https://www.djangoproject.com/" style='color:#DB4437' title="https://www.djangoproject.com" target="_blank">Django</a> powered responsive web app based on Material Design</h5>
+      </div>
+      <div class='row'></div>
+      <div class='row'></div><br>
+    </div>
+
+    <div class="container" id='container_color_3'>
+      <div class='row'></div>
+      <div class='row'></div>
+      <div class='row'></div>
+      <div class='row'></div>
+      <div class="row center">
+        <a style='background-color:#4285F4;' id="download-button" class="btn-large waves-effect waves-light modal-trigger" href="#modal1" data-target="modal1">About</a>
+      </div>
+      <div class='row'></div><br>
+    </div>
+  </div>
+
+  <!-- Modal Structure -->
+<div class="container">
+   <div class="section">
+     <div id="modal1" class="modal font_ubuntu">
+       <div class="modal-content blue">
+           <div class="card-content white-text">
+             <h4>About</h4>
+
+           </div>
+       </div>
+     </div>
+   </div>
+ </div>
+  <!--Modal structure ends-->
+ {% endblock %}
+
+{% block load_js %}
+  $(document).ready(function(){
+    $('.modal').modal();
+  });
+{% endblock %}

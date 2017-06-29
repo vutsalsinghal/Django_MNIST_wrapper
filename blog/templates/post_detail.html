@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block load_css %}
+  .parallax-container
+  {
+    height: 50%;
+  }
+{% endblock %}
+
+{%  block article_content %}
+  <div class="section">
+    <div class="container parallax-container">
+      <div class="parallax col l12" id='para'><img src="/static/images/bear.svg"></div>
+      <div class='container' style='position: relative; width: 85%; min-height: 60%; margin-top: 30%; background-color: #BA0A35;'>
+        <div class='row'>
+          <div class='col l10 offset-l1'>
+            <div class='row'></div>
+            <div class='row'></div>
+            <div class='row'>
+              <span class="left">{{ post.post_labels }}</span>
+              <span class="right">{{ post.published_date }}</span>
+            </div>
+            <hr>
+            <h3 class="white-text">{{ post.title | title }}</h3>
+            <div class='row'></div>
+            <div class='row'>
+              <div class="='col l2">
+                <i class="left material-icons white-text medium">account_circle</i>
+              </div>
+              <div class='col l4'>
+                <hr>
+                <span class="">{{ post.author | title }}</span>
+                <hr>
+              </div>
+            </div>
+
+            <div class='row'></div>
+            <div class='row'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      {% if user_edit %}
+        <a href="" target="_blank" title="Edit"><i class="right"><img src="" height='60' width='60' /></i></a>
+      {% endif %}
+      
+      <h3 class="cyan-text text-darken-3">{{ post.title | title }}</h3>
+      <span class="right">{{ post.published_date }} by {{ post.author }}</span><br>
+      <span>{{ post.text }}</span>
+    </div>
+  </div>
+{% endblock %}
+
+{% block load_js %}
+  $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+{% endblock %}

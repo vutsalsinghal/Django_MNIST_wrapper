@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block article_content %}
+<div class="section">
+   <div class="container">
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+   <div class='row'></div>
+ 	<h3>You are not connected.</h3>
+ 	<!--<a href="{% url "connect" %}" id="download-button" class="btn waves-effect waves-light orange">Log In</a>-->
+ 
+	 <script type="text/javascript">
+	   setTimeout(function() {
+	   window.location.href ="/";
+	 }, 3000);
+	 </script>
+  </div>
+</div>
+{% endblock %}
