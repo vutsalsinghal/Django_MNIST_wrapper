@@ -7,6 +7,7 @@ This is a web app for MNIST dataset to classify/predict handwritten digits. Deve
 ## Dependencies
 
 ```sudo pip install -r requirements.txt```
+Use of ```virtualenv``` is strongly suggested!
 
 ## Usage
 
