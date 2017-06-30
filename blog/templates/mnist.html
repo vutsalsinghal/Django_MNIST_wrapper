@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block title_html %}
+  MNIST
+{% endblock %}
+
 {% block load_css %}
 {% endblock %}
 
@@ -16,7 +20,7 @@
 		<div class='row'></div>
 		<div class='row'>
 			<div class='col l4 m4 s12'>
-				<h5 class='red-text'>Draw a single digit inside.</h5><br><br>
+			    <h5 class='red-text'>Draw a single digit inside.</h5><br><br>
 				<!--<span style="color: #4DAF7C; font-weight: 400; font-family: 'Open Sans', Helvetica;	">Draw the Digit inside this Box!</span><br>-->
 				<!--<canvas id="canvas" width="280" height="280" style="border:5px solid; border-radius: 5px; cursor: crosshair;"></canvas>-->
 				<canvas id="canvas" width="280" height="280" style="border:5px solid; border-radius: 5px; cursor: crosshair;" class='tooltipped' data-position="top" data-delay="50" data-tooltip="The bigger you draw the better!"></canvas>
@@ -31,10 +35,10 @@
 		</div>
 		<div class='row'>
 			<div class='col l3 m3 s6'>
-				<a href="#" class="debug btn myButton" onclick='AjaxCall()'><span>Predict</span></a>
+				<a href="#" class="debug btn myButton" onclick='AjaxCall()' style="background-color:#0f9d58"><span>Predict</span></a>
 			</div>
 			<div class='col l3 m3 s6'>
-				<input type="button" id="clearButton" value="Clear" class='btn'>
+				<input type="button" id="clearButton" value="Clear" class='btn' style="background-color:#4285F4">
 			</div>
 		</div>
 		<div class='row'></div>
@@ -44,12 +48,12 @@
 	</div>
 </div>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     function AjaxCall(){
       event.preventDefault();
-      $('#result').text('Processing...');
+      $('#result').text('Processing...(few seconds)');
       var canvasObj = document.getElementById("canvas");
-		var img = canvasObj.toDataURL();
+	  var img = canvasObj.toDataURL();
       $.ajax({
           type: "POST",
           url: "/mnist",
@@ -60,38 +64,6 @@
               $('#result').text(' Predicted Output: '+data.response);
             }})
       };
-
-          // CSRF code
-          function getCookie(name) {
-              var cookieValue = null;
-              var i = 0;
-              if (document.cookie && document.cookie !== '') {
-                  var cookies = document.cookie.split(';');
-                  for (i; i < cookies.length; i++) {
-                      var cookie = jQuery.trim(cookies[i]);
-                      // Does this cookie string begin with the name we want?
-                      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                          break;
-                      }
-                  }
-              }
-              return cookieValue;
-          }
-          var csrftoken = getCookie('csrftoken');
-
-          function csrfSafeMethod(method) {
-              // these HTTP methods do not require CSRF protection
-              return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-          }
-          $.ajaxSetup({
-              crossDomain: false, // obviates need for sameOrigin test
-              beforeSend: function(xhr, settings) {
-                  if (!csrfSafeMethod(settings.type)) {
-                      xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                  }
-              }
-          });
   </script>
 {% endblock %}
 
@@ -110,7 +82,7 @@
 	context.color = "black";
 	context.lineWidth = 10;
     context.lineJoin = context.lineCap = 'round';
-	
+
 	debug();
 
 	canvas.addEventListener( "mousemove", function( e )
@@ -136,12 +108,12 @@
 	}, false );
 
 	var onPaint = function()
-	{	
+	{
 		context.lineWidth = context.lineWidth;
 		context.lineJoin = "round";
 		context.lineCap = "round";
 		context.strokeStyle = context.color;
-	
+
 		context.beginPath();
 		context.moveTo( lastMouse.x, lastMouse.y );
 		context.lineTo( Mouse.x, Mouse.y );
@@ -153,14 +125,14 @@
 	{
 		/* CLEAR BUTTON */
 		var clearButton = $( "#clearButton" );
-		
+
 		clearButton.on( "click", function()
 		{
-			
+
 				context.clearRect( 0, 0, 280, 280 );
 				context.fillStyle="white";
 				context.fillRect(0,0,canvas.width,canvas.height);
-			
+
 		});
 
 		/* COLOR SELECTOR */
@@ -170,9 +142,9 @@
 			var color = $( "#colors" ).val();
 			context.color = color;
 		});
-		
+
 		/* LINE WIDTH */
-		
+
 		$( "#lineWidth" ).change(function()
 		{
 			context.lineWidth = $( this ).val();
