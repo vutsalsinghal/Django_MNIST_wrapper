@@ -20,4 +20,4 @@ That's it! It's serving a saved Keras model to you via Django.
 
 ## Credits
 
-This code was inspired from [||Source||](https://github.com/llSourcell), who had created a similar wrapper using [Flask](http://flask.pocoo.org/) Micro Framework.
+This code was inspired from [||Source||](https://github.com/llSourcell), who had created a [similar](https://github.com/llSourcell/how_to_deploy_a_keras_model_to_production) wrapper using [Flask](http://flask.pocoo.org/) Micro Framework.
